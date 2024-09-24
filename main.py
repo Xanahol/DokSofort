@@ -86,7 +86,7 @@ def show_progress_bar(total_images):
     progress_window = tk.Toplevel()
     progress_window.title("Generating Document...")
     progress_window.geometry("300x120")
-    icon_path = resource_path("Logo-NoBg-black.ico")
+    icon_path = resource_path("Public/Logo-NoBg-black.ico")
     progress_window.iconbitmap(icon_path)
     progress_window.resizable(False, False)
 
@@ -127,7 +127,7 @@ def gui():
     root.configure(bg="black")
 
     # Add the custom icon (make sure the file path is correct)
-    icon_path = resource_path("Logo-NoBg-black.ico")  # Provide the correct path to your .ico file
+    icon_path = resource_path("Public/Logo-NoBg-black.ico")  # Provide the correct path to your .ico file
     root.iconbitmap(icon_path)
 
     # Holds image directories
@@ -135,7 +135,7 @@ def gui():
     save_path_var = tk.StringVar()
 
     # Load and resize the image using Pillow (adjust the width and height as needed)
-    image_path = resource_path("Logo-NoBg.png")  # Replace with your actual image path
+    image_path = resource_path("Public/Logo-NoBg.png")  # Replace with your actual image path
     img = Image.open(image_path)
 
     # Resize the image (for example, width=50, height=50)
