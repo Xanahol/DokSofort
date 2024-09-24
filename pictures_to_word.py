@@ -4,7 +4,7 @@ from tkinter import filedialog, messagebox, ttk
 from docx import Document
 from docx.shared import Inches
 from docx2pdf import convert
-import subprocess
+from datetime import datetime
 import threading
 import os
 from PIL import Image, ImageTk
@@ -31,7 +31,11 @@ def create_document(image_folders, save_path, progress_callback):
                 progress_callback(image_count, total_images)
 
     # Save the document
-    docx_file = os.path.join(save_path, "Bilderdokument.docx")
+    # Generate the current timestamp in the MMDDHHSS format
+    timestamp = datetime.now().strftime("%m%d%H%M%S")
+
+    # Use the timestamp in the filename
+    docx_file = os.path.join(save_path, f"DokSofort{timestamp}.docx")
     doc.save(docx_file)
 
     # Convert docx to pdf
