@@ -1,1 +1,4 @@
 TestDocs
+build
+dist
+*.spec

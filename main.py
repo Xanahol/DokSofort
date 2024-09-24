@@ -1,14 +1,24 @@
 import os
+import sys
 import tkinter as tk
 from tkinter import filedialog, messagebox, ttk
 from docx import Document
 from docx.shared import Inches
-from docx2pdf import convert
 from datetime import datetime
 import threading
-import os
 from PIL import Image, ImageTk
 
+# Function to get the right path when running from PyInstaller
+def resource_path(relative_path):
+    """ Get the absolute path to a resource, works for dev and PyInstaller """
+    try:
+        # PyInstaller stores files in a temp folder when running the exe
+        base_path = sys._MEIPASS
+    except AttributeError:
+        # For regular python execution, return relative path
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
 
 # Function to generate the document
 def create_document(image_folders, save_path, progress_callback):
@@ -37,9 +47,6 @@ def create_document(image_folders, save_path, progress_callback):
     # Use the timestamp in the filename
     docx_file = os.path.join(save_path, f"DokSofort{timestamp}.docx")
     doc.save(docx_file)
-
-    # Convert docx to pdf
-    convert(docx_file)
 
     # Open the output folder
     os.startfile(save_path)
@@ -79,7 +86,7 @@ def show_progress_bar(total_images):
     progress_window = tk.Toplevel()
     progress_window.title("Generating Document...")
     progress_window.geometry("300x120")
-    icon_path = "Logo-NoBg-black.ico"
+    icon_path = resource_path("Logo-NoBg-black.ico")
     progress_window.iconbitmap(icon_path)
     progress_window.resizable(False, False)
 
@@ -112,7 +119,7 @@ def enable_main_window(root):
 # GUI setup
 def gui():
     root = tk.Tk()
-    root.title("DokSofort - Bilder zu Word/PDF")
+    root.title("DokSofort - Bilder zu Word")
     root.geometry("500x320")  # Adjusted window size for more space
     root.resizable(width=False, height=False)
 
@@ -120,7 +127,7 @@ def gui():
     root.configure(bg="black")
 
     # Add the custom icon (make sure the file path is correct)
-    icon_path = "Logo-NoBg-black.ico"  # Provide the correct path to your .ico file
+    icon_path = resource_path("Logo-NoBg-black.ico")  # Provide the correct path to your .ico file
     root.iconbitmap(icon_path)
 
     # Holds image directories
@@ -128,7 +135,7 @@ def gui():
     save_path_var = tk.StringVar()
 
     # Load and resize the image using Pillow (adjust the width and height as needed)
-    image_path = "Logo-NoBg.png"  # Replace with your actual image path
+    image_path = resource_path("Logo-NoBg.png")  # Replace with your actual image path
     img = Image.open(image_path)
 
     # Resize the image (for example, width=50, height=50)
