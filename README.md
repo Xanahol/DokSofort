@@ -1,3 +1,1 @@
-![](https://github.com/Xanahol/DokSofort/blob/main/SofortDok%20Tutorial.gif)
-
-![](https://github.com/Xanahol/DokSofort/blob/main/SofortDok%20Tutorial.mp4)
+![](https://github.com/Xanahol/DokSofort/blob/main/Tutorials/SofortDok%20Tutorial.gif)
